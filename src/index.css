@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────────────── Sprout & Spark · 全局基底 ───────────────────────── */
+@layer base {
+  :root {
+    --brand-green: #58cc02;
+    --deep-green: #43c000;
+    --soft-green: #7ac70c;
+    --light-green: #a8e06c;
+    --mint: #e8f5e9;
+    --mint-deep: #d3efd6;
+    --warm-white: #fafaf5;
+    --off-white: #f5f5f0;
+    --light-gray: #e8e8e3;
+    --sunshine: #ffc800;
+    --soft-gold: #ffd54f;
+    --light-yellow: #fff8e1;
+    --coral: #ff8a65;
+    --coral-soft: #ffd4c7;
+    --sky: #5bb3f0;
+    --sky-soft: #dceefb;
+    --correct: #4caf50;
+    --warn: #ff9800;
+    --text-primary: #2d3436;
+    --text-secondary: #636e72;
+    --text-hint: #b2bec3;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  /* 预留纵向滚动条槽位 → 切换页面滚动条增减时, 居中容器不再横向跳动 (header 晃动) */
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--warm-white);
+    color: var(--text-primary);
+    font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--mint);
+    color: var(--deep-green);
+  }
+
+  /* 焦点可见：品牌绿 2px outline + 2px offset（EXPERIENCE A11y） */
+  :focus-visible {
+    outline: 2px solid var(--brand-green);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+/* ───────────────────────── 组件级工具 ───────────────────────── */
+@layer components {
+  /* 被学习的英文单词一律 Crimson Pro 衬线（仪式感，DESIGN.md Typography） */
+  .vocab {
+    font-family: 'Crimson Pro', Georgia, serif;
+  }
+  /* 中文行高放宽到 1.7（DESIGN.md Typography） */
+  :lang(zh),
+  .cjk {
+    font-family: 'Noto Sans SC', 'Inter', sans-serif;
+    line-height: 1.7;
+  }
+  /* 例句中目标词高亮：柔黄底 */
+  .word-highlight {
+    background: var(--light-yellow);
+    border-radius: 4px;
+    padding: 0 3px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  /* 全局：可点的英文单词（点词即弹窗） */
+  .clickable-word {
+    cursor: pointer;
+    border-bottom: 1.5px dashed transparent;
+    transition: border-color 0.18s ease, color 0.18s ease;
+  }
+  .clickable-word:hover {
+    border-bottom-color: var(--light-green);
+    color: var(--deep-green);
+  }
+  /* 朗读中：当前正在读的词，绿底高亮跟随 */
+  .reading-active {
+    background: var(--light-green);
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 3px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    transition: background 0.15s ease;
+  }
+
+  /* 朗读进度条：原生 range，品牌绿 track + 圆形拇指（仅全文朗读） */
+  .reading-progress {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+  }
+  .reading-progress::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: linear-gradient(
+      to right,
+      var(--brand-green) calc(var(--p, 0) * 100%),
+      var(--mint-deep) calc(var(--p, 0) * 100%)
+    );
+  }
+  .reading-progress::-moz-range-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: linear-gradient(
+      to right,
+      var(--brand-green) calc(var(--p, 0) * 100%),
+      var(--mint-deep) calc(var(--p, 0) * 100%)
+    );
+  }
+  .reading-progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    margin-top: -4px;
+    border-radius: 9999px;
+    background: var(--brand-green);
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+  }
+  .reading-progress::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    background: var(--brand-green);
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+  }
+
+  /* 毛玻璃浮层（本章单词菜单、导航栏） */
+  .glass {
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  .glass-mint {
+    background: rgba(232, 245, 233, 0.7);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  /* AI 绿金渐变球 */
+  .ai-gradient {
+    background: linear-gradient(135deg, var(--light-green), var(--brand-green));
+  }
+
+  .spark-gradient {
+    background: linear-gradient(135deg, var(--soft-gold), var(--sunshine));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* 骨架波浪 */
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background: var(--light-gray);
+  }
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.55),
+      transparent
+    );
+    animation: shimmer 1.6s infinite;
+  }
+}
+
+/* 柔和滚动条 */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--mint-deep);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--light-green);
+  background-clip: padding-box;
+}
+
+/* 动效为产品体验核心：即使系统开启「减少动态」也保留 UI 动效 (按产品要求) */

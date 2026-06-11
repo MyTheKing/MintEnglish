@@ -1,0 +1,10 @@
+node_modules
+dist
+doc/reference-assets
+.git
+.claude
+.frames
+*.tsbuildinfo
+*.stackdump
+vite.config.js
+vite.config.d.ts
