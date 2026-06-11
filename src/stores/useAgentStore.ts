@@ -47,6 +47,7 @@ interface AgentState {
   createAgent: (name: string, persona: string) => string
   newConversation: (agentId: string) => void
   ensureGreeting: (agentId: string) => void
+  getCurrentAgent: () => Agent
 }
 
 // 占位 AI 回复 (纯前端 mock)
@@ -73,6 +74,12 @@ export const useAgentStore = create<AgentState>()(
         }
         set({ currentAgentId: id })
         get().ensureGreeting(id)
+      },
+
+      // 获取当前智能体 (带保护, 确保始终返回有效值)
+      getCurrentAgent: () => {
+        const { agents, currentAgentId } = get()
+        return agents.find((a) => a.id === currentAgentId) ?? agents[0] ?? DEFAULT_AGENTS[0]
       },
 
       ensureGreeting: (agentId) => {

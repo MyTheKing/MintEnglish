@@ -42,9 +42,10 @@ export default function AssistantPage() {
     createAgent,
     newConversation,
     ensureGreeting,
+    getCurrentAgent,
   } = useAgentStore()
 
-  const agent = agents.find((a) => a.id === currentAgentId) ?? agents[0]
+  const agent = getCurrentAgent()
   const msgs: ChatMessage[] = (agent && conversations[agent.id]) ?? []
 
   const [input, setInput] = useState('')
