@@ -2,6 +2,8 @@
 
 # MintEnglish
 
+🔗 **在线体验**: http://testdemo.joshu.xin/#/
+
 #### 产品面向用户群体是
 
 学生、考研、职场、初学者、专家
