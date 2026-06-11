@@ -2,7 +2,7 @@
 
 # MintEnglish
 
-🔗 **在线体验**: http://testdemo.joshu.xin/#/
+🔗 **在线体验**: http://testdemo.joshu.xin/
 
 #### 产品面向用户群体是
 
