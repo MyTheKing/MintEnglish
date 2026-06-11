@@ -44,7 +44,7 @@ export default function App() {
       <SpatialBackground />
       {!bare && <TopNav />}
       <main>
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="popLayout">
           <motion.div
             key={seg}
             variants={pageVariants}
