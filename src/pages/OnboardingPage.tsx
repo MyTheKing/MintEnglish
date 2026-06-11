@@ -202,7 +202,7 @@ export default function OnboardingPage() {
             <SparkleIcon width={18} height={18} />
           </span>
           <span className="font-display text-[17px] font-bold tracking-tight text-text-primary">
-            Sprout &amp; Spark
+            MintEnglish
           </span>
         </div>
 

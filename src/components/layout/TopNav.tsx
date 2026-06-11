@@ -53,7 +53,7 @@ export function TopNav() {
             <SparkleIcon width={18} height={18} />
           </span>
           <span className="font-display text-[18px] font-bold text-deep-green tracking-tight">
-            Sprout<span className="text-sunshine"> &amp; </span>Spark
+            MintEnglish
           </span>
         </Link>
 

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────
-// Sprout & Spark · UI 基础组件
+// MintEnglish · UI 基础组件
 // 圆润友好 · 柔和绿阴影 · 绿主角金点睛
 // ─────────────────────────────────────────────
 import { forwardRef, useLayoutEffect, useRef, useState } from 'react'

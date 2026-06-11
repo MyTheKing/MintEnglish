@@ -123,7 +123,7 @@ export default function HomePage() {
         <motion.div variants={item}>
           <Chip accent="mint" className="mb-5 gap-1.5">
             <SparkleIcon width={13} height={13} />
-            Sprout &amp; Spark
+            MintEnglish
           </Chip>
 
           <h1 className="font-display text-display leading-tight text-text-primary">

@@ -111,7 +111,7 @@ export const useAgentStore = create<AgentState>()(
         set((s) => ({ conversations: { ...s.conversations, [agentId]: [] } })),
     }),
     {
-      name: 'sprout-agents',
+      name: 'mintenglish-agents',
       version: 1,
       // v1: 仅英语助手为内置, 其余 (含商务/面试) 改为非内置
       migrate: (persisted, version) => {

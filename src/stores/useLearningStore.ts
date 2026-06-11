@@ -92,6 +92,6 @@ export const useLearningStore = create<LearningState>()(
           lastStudyDate: null,
         }),
     }),
-    { name: 'sprout-learning' },
+    { name: 'mintenglish-learning' },
   ),
 )
