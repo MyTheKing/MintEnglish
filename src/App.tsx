@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { TopNav } from './components/layout/TopNav'
 import { BottomTabBar } from './components/layout/BottomTabBar'
 import { SpatialBackground } from './components/layout/SpatialBackground'
@@ -8,6 +8,7 @@ import { WordPopup } from './components/global/WordPopup'
 import { GlobalAIWidget } from './components/global/GlobalAIWidget'
 import { GlobalVoiceCall } from './components/global/GlobalVoiceCall'
 import { WordSearchModal } from './components/global/WordSearchModal'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { pageVariants } from './lib/motion'
 
 import HomePage from './pages/HomePage'
@@ -42,13 +43,15 @@ export default function App() {
       <SpatialBackground />
       {!bare && <TopNav />}
       <main>
-        <AnimatePresence mode="wait">
+        {/* 进场动画按 seg 重放, 不做退场等待: 导航即时换页, 避免快速来回切换时
+            新页卡在 initial(透明+模糊) 而白屏 (framer mode="wait" 被打断的经典问题). */}
+        {/* 按 pathname 作 key → 某页渲染抛错时只兜底该页, 切换路由即重挂自动恢复. */}
+        <ErrorBoundary key={location.pathname}>
           <motion.div
             key={seg}
             variants={pageVariants}
             initial="initial"
             animate="enter"
-            exit="exit"
           >
             <Routes location={location}>
               <Route path="/" element={<HomePage />} />
@@ -60,7 +63,7 @@ export default function App() {
               <Route path="/assistant" element={<AssistantPage />} />
             </Routes>
           </motion.div>
-        </AnimatePresence>
+        </ErrorBoundary>
       </main>
 
       {/* 全局机制: 点词弹窗 + 悬浮 AI 球 (后者在 /assistant 自动隐藏) + 全局语音通话窗 (全页面可用) */}
