@@ -29,11 +29,13 @@ export default function App() {
   // 避免 calc(100vh-56px) 亚像素取整 + 进场位移带来的一点点上下蹭动.
   const fullscreen = seg === '/graph' || seg === '/assistant'
   useEffect(() => {
-    if (!fullscreen) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    if (fullscreen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
     return () => {
-      document.body.style.overflow = prev
+      document.body.style.overflow = ''
     }
   }, [fullscreen])
 
