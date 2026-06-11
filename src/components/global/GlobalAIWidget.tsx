@@ -35,8 +35,8 @@ export function GlobalAIWidget() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  const { agents, currentAgentId, conversations, sendMessage, ensureGreeting, newConversation, setCurrentAgent, getCurrentAgent } = useAgentStore()
-  const agent = getCurrentAgent()
+  const { agents, currentAgentId, conversations, sendMessage, ensureGreeting, newConversation, setCurrentAgent } = useAgentStore()
+  const agent = agents.find((a) => a.id === currentAgentId) ?? agents[0]
   const msgs = conversations[currentAgentId] ?? []
 
   useEffect(() => { ensureGreeting(currentAgentId) }, [currentAgentId, ensureGreeting])
@@ -179,7 +179,7 @@ export function GlobalAIWidget() {
               </button>
               <button onClick={() => newConversation(currentAgentId)} aria-label="新对话" className="text-text-hint hover:text-deep-green transition-colors cursor-pointer"><RefreshIcon width={17} height={17} /></button>
               <button onClick={openCall} aria-label="语音电话" className="text-text-hint hover:text-deep-green transition-colors cursor-pointer"><PhoneIcon width={17} height={17} /></button>
-              <button onClick={() => { setOpen(false); navigate('/assistant') }} aria-label="展开为整页" className="text-text-hint hover:text-deep-green transition-colors cursor-pointer"><ChatIcon width={17} height={17} /></button>
+              <button onClick={() => navigate('/assistant')} aria-label="展开为整页" className="text-text-hint hover:text-deep-green transition-colors cursor-pointer"><ChatIcon width={17} height={17} /></button>
               <button onClick={() => setOpen(false)} aria-label="收起" className="text-text-hint hover:text-text-primary transition-colors cursor-pointer"><CloseIcon width={18} height={18} /></button>
 
               {/* 智能体切换下拉 */}

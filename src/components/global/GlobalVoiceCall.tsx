@@ -22,8 +22,8 @@ export function GlobalVoiceCall() {
 
 function CallCard() {
   const closeCall = useCallStore((s) => s.closeCall)
-  const { agents, currentAgentId, sendMessage, getCurrentAgent } = useAgentStore()
-  const agent = getCurrentAgent()
+  const { agents, currentAgentId, sendMessage } = useAgentStore()
+  const agent = agents.find((a) => a.id === currentAgentId) ?? agents[0]
 
   const [seconds, setSeconds] = useState(0)
   const [muted, setMuted] = useState(false)

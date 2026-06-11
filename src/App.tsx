@@ -29,13 +29,11 @@ export default function App() {
   // 避免 calc(100vh-56px) 亚像素取整 + 进场位移带来的一点点上下蹭动.
   const fullscreen = seg === '/graph' || seg === '/assistant'
   useEffect(() => {
-    if (fullscreen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    if (!fullscreen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
     return () => {
-      document.body.style.overflow = ''
+      document.body.style.overflow = prev
     }
   }, [fullscreen])
 
@@ -44,7 +42,7 @@ export default function App() {
       <SpatialBackground />
       {!bare && <TopNav />}
       <main>
-        <AnimatePresence mode="popLayout">
+        <AnimatePresence mode="wait">
           <motion.div
             key={seg}
             variants={pageVariants}
